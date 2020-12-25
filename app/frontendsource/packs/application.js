@@ -11,4 +11,5 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-import "controllers"
+import "controllers";
+import "styles/frontend/index.js";
