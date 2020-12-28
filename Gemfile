@@ -18,6 +18,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 gem 'devise', '~> 4.7', '>= 4.7.3'
+gem 'omniauth-google-oauth2', '~> 0.8.1'
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
