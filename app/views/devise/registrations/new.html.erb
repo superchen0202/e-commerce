@@ -1,29 +1,52 @@
-<h2>Sign up</h2>
+<section class="container">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="columns is-12">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <!-- 3/12 Enroll side -->
+      <div class="column is-3">   
+          
+          <h2 class="title is-size-5">趕緊手刀註冊加入我們的會員！</h2>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+          
+          <!-- 信箱 -->
+          <div class="field">
+            <%= f.label :email, "信箱", class: 'label' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+          </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+          <!-- 密碼 -->
+          <div class="field">
+            <%= f.label :password, "密碼", class: 'label' %>
+            <%= f.password_field :password, autocomplete: "new-password", class: 'input' %>
+            <% if @minimum_password_length %>
+            <em>(請確認輸入密碼長度至少有<%= @minimum_password_length %>個字元 )</em>
+            <% end %>
+          </div>
 
-<%= render "devise/shared/links" %>
+          <!-- 密碼確認 -->
+          <div class="field">
+            <%= f.label :password_confirmation, "確認密碼", class: 'label' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'input' %>
+          </div>
+
+          <!--註冊按鍵  -->
+          <div class="actions"><%= f.submit "註冊", class: "button is-primary" %></div>
+
+          <% end %>
+
+          <!-- 登入 / 第三方登入 -->
+          <%= render "devise/shared/links" %>
+          
+      </div>
+
+      <!-- 9/12 Picture -->
+      <div class="column is-9">
+        <%= image_pack_tag "sign_in_page/971212-06.jpg" %>
+      </div>
+
+    </div>
+   
+</section>
