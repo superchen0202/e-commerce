@@ -1,5 +1,6 @@
 import bulmaCarousel from 'bulma-carousel';
 
+// home page carousel
 document.addEventListener('turbolinks:load', ()=>{
 
     let element = document.querySelector(".carousel");
