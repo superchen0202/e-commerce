@@ -21,10 +21,14 @@ Bundler.require(*Rails.groups)
 
 module ECommerce
   class Application < Rails::Application
+
+    config.time_zone = "Taipei" 
+    
     config.generators do |g|
       g.assets false
       g.helper false
     end
+    
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
