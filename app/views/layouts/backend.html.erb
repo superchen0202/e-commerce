@@ -16,8 +16,11 @@
 
     <%= render "shared/backend/flash" if notice %>
     <%= render "shared/backend/navbar" %>
-    <%= yield %>
-
+    
+    <section class="container">
+      <%= yield %>
+    </section>
+    
     
   </body>
 

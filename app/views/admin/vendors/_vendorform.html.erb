@@ -1,0 +1,25 @@
+<h1 class="title">新建廠商</h1>
+
+<%= form_with(model: [:admin, vendor] ) do |form| %>
+
+    <!-- 廠商名稱 -->
+    <div class="field">
+        <%= form.label :title, "廠商名稱", class: "label" %>
+        <%= form.text_field :title, placeholder: "ex:太好呷滷肉飯" , class: "input" %>
+    </div>
+
+    <!-- 文字說明 -->
+    <div class="field">
+        <%= form.label :desciption, "說明", class: "label" %>
+        <%= form.text_area :description, placeholder: "ex:龜山鄉中興路241號", rows:"10", cols:"210" , class: "text_area" %>
+    </div>
+
+    <!-- 正常營運？ -->
+    <div class="field">
+        <%= form.check_box :online %>
+        <%= form.label :online, "是否營業中?", class: "checkbox" %>
+    </div>
+
+    <%= form.submit "建立廠商" ,class: "button is-primary is-medium" %>
+
+<% end %>
