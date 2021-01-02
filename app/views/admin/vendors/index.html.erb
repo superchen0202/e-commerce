@@ -18,10 +18,16 @@
       <% @vendors.each do |vendor| %>
 
     <tr>
-        
+
       <td><%= link_to vendor.title, edit_admin_vendor_path(vendor) %></td>
       <td><%= strip_tags(vendor.description).truncate(100) %></td>
-      <td><%= vendor.online %></td>
+      <td>
+        <% if vendor.online %>
+            <%= "正常營業" %>
+        <% else %>
+            <%= "停止營業" %>
+        <% end %>    
+      </td>
       <td><%= vendor.updated_at %></td>
 
       <!-- edit / delete -->
