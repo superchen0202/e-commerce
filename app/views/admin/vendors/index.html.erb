@@ -23,9 +23,9 @@
       <td><%= strip_tags(vendor.description).truncate(100) %></td>
       <td>
         <% if vendor.online %>
-            <%= "正常營業" %>
+            <p>正常營業</p>
         <% else %>
-            <%= "停止營業" %>
+           <p class ="has-text-danger">停止營運</p> 
         <% end %>    
       </td>
       <td><%= vendor.updated_at %></td>

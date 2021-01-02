@@ -38,6 +38,8 @@ class Admin::VendorsController < Admin::BaseController
     end
 
     def destroy
+        @vendor.destroy
+        redirect_to admin_vendors_path, notice: "刪除成功!"
     end
 
     private
