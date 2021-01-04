@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
         render file: "#{Rails.root}/public/404.html",
         layout: false,
         status: false
+        
 
     end
 
