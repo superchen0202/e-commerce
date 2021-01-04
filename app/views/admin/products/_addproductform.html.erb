@@ -1,5 +1,14 @@
-<%= form_with(model: [:admin, product]) do |form| %>
+<!-- Show ERROR message if sheet content can't pass model validation -->
+<% if product.errors.any? %>
+    <div class="notification is-danger is-marginless" >
+        <% product.errors.each do |error| %>
+            <%= error.full_message %></br>
+        <% end %>
+    </div>
+<% end %>
 
+
+<%= form_with(model: [:admin, product]) do |form| %>
 
     <div class="columns">
 
@@ -44,6 +53,6 @@
       <%= form.label :on_sell, '是否上架？', class: 'checkbox' %>
     </div>
   
-    <%= form.submit class: 'button is-primary is-medium' %>
+    <%= form.submit "新增產品", class: 'button is-primary is-medium' %>
     
   <% end %>

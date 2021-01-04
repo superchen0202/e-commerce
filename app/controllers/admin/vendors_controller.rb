@@ -6,9 +6,6 @@ class Admin::VendorsController < Admin::BaseController
         @vendors = Vendor.order('created_at DESC')
     end
 
-    def show
-    end
-
     def new
         @vendor = Vendor.new
     end
