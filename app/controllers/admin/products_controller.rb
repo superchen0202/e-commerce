@@ -50,7 +50,8 @@ class Admin::ProductsController < Admin::BaseController
                                             :vendor_id,
                                             :list_price, 
                                             :sell_price, 
-                                            :on_sell
+                                            :on_sell,
+                                            :description
                                         )
     end
 

@@ -6,6 +6,8 @@ class Product < ApplicationRecord
 
   #relation
   belongs_to :vendor
+  has_rich_text :description
+
 
   #validation
   #validates :code, uniqueness: true
