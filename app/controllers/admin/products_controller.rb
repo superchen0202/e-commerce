@@ -3,7 +3,7 @@ class Admin::ProductsController < Admin::BaseController
     before_action :find_product, only:[:edit, :update, :destroy]
 
     def index
-        @products = Product.all
+        @products = Product.order("created_at DESC").includes(:vendor)
     end
 
     def new
@@ -21,19 +21,27 @@ class Admin::ProductsController < Admin::BaseController
         end
     end 
 
-    def edit
-        
+    def edit 
     end
 
     def update
+        if @product.update(products_params)
+            redirect_to edit_admin_product_path, notice: "商品資訊更新成功!"
+        else
+            render :edit
+        end
     end
 
     def destroy
+
+        @product.destroy
+        redirect_to admin_products_path, notice: "刪除成功！"
+
     end
 
     private
     def find_product
-        product = Product.friendly.find(params[:id])
+        @product = Product.friendly.find(params[:id])
     end
 
     def products_params
