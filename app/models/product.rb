@@ -7,6 +7,8 @@ class Product < ApplicationRecord
   #relation
   belongs_to :vendor
   has_rich_text :description
+  
+  paginates_per 5
 
 
   #validation
