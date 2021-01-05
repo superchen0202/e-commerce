@@ -4,7 +4,6 @@ class Admin::ProductsController < Admin::BaseController
 
     def index
         @products = Product.order("created_at DESC").includes(:vendor).page params[:page]
-        #@products = Product.order("created_at DESC").includes(:vendor)
     end
 
     def new

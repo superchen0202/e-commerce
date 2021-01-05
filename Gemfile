@@ -23,6 +23,7 @@ gem 'figaro', '~> 1.2'
 gem 'paranoia', '~> 2.4', '>= 2.4.3'
 gem 'friendly_id', '~> 5.4', '>= 5.4.1'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
+gem 'image_processing', '~> 1.2'
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
