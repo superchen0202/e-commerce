@@ -3,7 +3,7 @@ class Admin::ProductsController < Admin::BaseController
     before_action :find_product, only:[:edit, :update, :destroy]
 
     def index
-        @products = Product.page params[:page]
+        @products = Product.order("created_at DESC").includes(:vendor).page params[:page]
         #@products = Product.order("created_at DESC").includes(:vendor)
     end
 
