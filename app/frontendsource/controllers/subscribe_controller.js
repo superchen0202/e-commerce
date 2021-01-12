@@ -24,10 +24,24 @@ export default class extends Controller {
             dataType: 'json',
             data: formdata,
 
+            success: (response) =>{
+                
+                switch(response.status){
+                    case 'OK':
+                        alert("感謝訂閱！");
+                        break;
+                    case 'Duplicated':
+                        alert(`${response.email}已經訂閱過了哦！`);
+                        break;
+                }
+                console.log(response);
+                this.emailTarget.value='';
 
-            success: function(resoponse){
-                console.log(resoponse);
-            }
+            },
+
+            error: (err)=>{
+                alert(err);
+            },
 
         });
 
