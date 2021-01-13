@@ -65,10 +65,9 @@
 
     <div class="field">
       <%= form.fields_for :skus do |sku_form| %>
-        <% render 'sku_form', form: sku_form %>
-      <% end %>
+        <%= render 'sku_form', form: sku_form %>
+      <% end %>    
     </div>
-
 
     <%= form.submit "新增產品", class: 'button is-primary is-medium' %>
     
