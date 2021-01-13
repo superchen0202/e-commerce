@@ -4,20 +4,28 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["template", "link"]
 
-  add(event){
+  add_sku(event){
     
     event.preventDefault();
     let content = this.templateTarget.innerHTML.replace(/NEW_RECORD/g, new Date().getTime());
     this.linkTarget.insertAdjacentHTML("beforebegin", content)
-
-
-    console.log(this.linkTarget);
-    //.replace(/NEW_RECORD/g, new Date().getTime())
+   
   }
 
-  connect(){
+  remove_sku(event){
+    event.preventDefault();
+    let wrapper = event.target.closest(".nested-fields");
+    console.log(wrapper);
+
+    if (wrapper.dataset.newRecord == "true") {
+      wrapper.remove();
+    }
     
-    //console.log("Connected!");
+    else{
+      wrapper.querySelector("input[name*='_destroy']").value = 1;
+      wrapper.style.display = "none";
+    }
   }
+
 
 }
