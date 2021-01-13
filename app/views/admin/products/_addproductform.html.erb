@@ -52,13 +52,21 @@
       <%= form.check_box :on_sell %>
       <%= form.label :on_sell, '是否上架？', class: 'checkbox' %>
     </div>
-  
 
     <div class="column">
       <div class="field">
         <%= form.label :description, '描述', class: 'label' %>
         <%= form.rich_text_area :description, class: 'input is-medium' %>
       </div>
+    </div>
+
+    <hr>
+    <h3>庫存項目</h3>
+
+    <div class="field">
+      <%= form.fields_for :skus do |sku_form| %>
+        <% render 'sku_form', form: sku_form %>
+      <% end %>
     </div>
 
 
