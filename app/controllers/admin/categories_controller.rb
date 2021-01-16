@@ -3,12 +3,14 @@ class Admin::CategoriesController < Admin::BaseController
     def index
     end
 
-    def create
-    end
-
     def new
+        @category = Category.new
+
     end
 
+    def create
+
+    end
 
     def edit
     end
