@@ -1,4 +1,6 @@
 import Sortable from 'sortablejs';
+import Rails from '@rails/ujs';
+
 
 document.addEventListener("turbolinks:load", ()=> {
 
@@ -11,17 +13,29 @@ document.addEventListener("turbolinks:load", ()=> {
 
         onEnd: (event) =>{
            
-           //console.log(event.item.dataset.item);
            let [model, id] = event.item.dataset.item.split('_');
+           
+           let data = new FormData();
+           data.append("id", id);
+           data.append("from", event.oldIndex);
+           data.append("to", event.newIndex);
 
-           console.log(model, id);
+           Rails.ajax({
+               url: "/admin/categories/sort",
+               type: "put",
+               data: data,
+
+               success: (response) =>{
+                   console.log(response);
+               },
+               error: (err) =>{},
+
+           });
+
         }
 
        });
    }
-
-   
-    // console.log(element);
 
 
 })
