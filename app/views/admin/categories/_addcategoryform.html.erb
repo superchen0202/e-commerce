@@ -16,6 +16,11 @@
     </div>
 
     <hr>
-    <%= form.submit "新增分類", class: "button is-primary" %>
 
+    <% if category.created_at == nil %>
+        <%= form.submit "新增分類", class: "button is-primary"  %>
+    <% else %>
+        <%= form.submit "更新分類", class: "button is-primary" %>
+    <% end %>
+ 
 <% end %>

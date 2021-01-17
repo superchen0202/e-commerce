@@ -3,6 +3,7 @@ class Admin::CategoriesController < Admin::BaseController
     before_action :find_category, only:[:edit, :update, :destroy]
 
     def index
+        @categories = Category.all
     end
 
     def new
@@ -24,11 +25,22 @@ class Admin::CategoriesController < Admin::BaseController
     end
 
     def update
+
+        if @category.update(category_params)
+            redirect_to edit_admin_category_path(@category), notice: "更新成功!"
+        else
+            render :edit
+        end
     end
 
     def destroy
+        @category.destroy
+        redirect_to admin_categories_path, notice: "刪除成功！"
     end
 
+
+
+    
     private 
 
     def find_category
