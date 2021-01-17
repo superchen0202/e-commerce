@@ -3,7 +3,7 @@ class Admin::CategoriesController < Admin::BaseController
     before_action :find_category, only:[:edit, :update, :destroy]
 
     def index
-        @categories = Category.all
+        @categories = Category.order(created_at: "DESC")
     end
 
     def new
@@ -40,7 +40,7 @@ class Admin::CategoriesController < Admin::BaseController
 
 
 
-    
+
     private 
 
     def find_category
