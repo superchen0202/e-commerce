@@ -1,12 +1,9 @@
 <div class="tabs is-centered">
-    
-    <!-- https://bulma.io/documentation/components/tabs/   -->
-    
-    <ul>
-      <li class="is-active"><a>Pictures</a></li>
-      <li><a>Music</a></li>
-      <li><a>Videos</a></li>
-      <li><a>Documents</a></li>
-    </ul>
 
+  <ul>
+    <% categories.each do |category| %>
+        <li><%= link_to category.name, category_path(category) %></li>
+    <% end %>
+  </ul>
+    
 </div>

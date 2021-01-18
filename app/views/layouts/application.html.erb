@@ -16,7 +16,7 @@
 
     <%= render "shared/frontend/flash" if notice %>
     <%= render "shared/frontend/navbar" %>
-    <%= render "shared/frontend/topmenu" %>
+    <%= render "shared/frontend/topmenu", categories: @categories %>
     <%= yield %>
     <%= render "shared/frontend/footer" %>
   </body>

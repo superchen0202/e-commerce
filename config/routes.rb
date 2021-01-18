@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   resources :products, only: [:show, :index]
 
+  # /categories/2
+  resources :categories, only: [:show]
+
   namespace :admin do
 
     root 'products#index'
