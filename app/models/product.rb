@@ -6,11 +6,14 @@ class Product < ApplicationRecord
 
   #relation
   belongs_to :vendor
-  has_rich_text :description
- 
+  belongs_to :category, optional: true
+  
   has_many :skus
   accepts_nested_attributes_for :skus, reject_if: :all_blank, allow_destroy: true
   
+  has_rich_text :description
+  has_one_attached :cover_image
+
   #the maximun anount of data can show in every one page
   paginates_per 5
 

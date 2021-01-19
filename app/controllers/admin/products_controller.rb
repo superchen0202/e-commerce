@@ -3,7 +3,7 @@ class Admin::ProductsController < Admin::BaseController
     before_action :find_product, only:[:edit, :update, :destroy]
 
     def index
-        @products = Product.order("created_at DESC").includes(:vendor).page params[:page]
+        @products = Product.order("created_at DESC").includes(:vendor, :category).page params[:page]
     end
 
     def new
@@ -53,7 +53,10 @@ class Admin::ProductsController < Admin::BaseController
                                             :sell_price, 
                                             :on_sell,
                                             :description,
+                                            :category_id,
+                                            :cover_image,
                                             skus_attributes: [:id, :spec, :quantity, :_destroy]
+                                            
                                         )
     end
 
