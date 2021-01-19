@@ -25,7 +25,7 @@
     <% @products.each do |product|  %>
       <tr>
         <td><%= link_to "#{product.name} ", edit_admin_product_path(product) %></td>
-        <td><%= product.category %></td>
+        <td><%= product.category&.name %></td>
         <td><%= product.code %></td>
         <td><%= image_tag product.cover_image.variant(resize: "250x250") if product.cover_image.attached?  %></td>
         <td><%= product.description %></td>
