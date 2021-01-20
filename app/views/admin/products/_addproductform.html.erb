@@ -13,7 +13,9 @@
   <!-- 商品圖檔上傳 -->
     <div>
       <%= form.file_field :cover_image %> </br>
-      <%= image_tag form.object.cover_image.variant(resize: "250x300") if form.object.cover_image.attached? %>
+      <%= image_tag form.object.cover_image.variant(resize: "250x300") if form.object.cover_image.attached? %></br>
+
+      <!-- link_to "刪除" , admin_product_delete_attachment_path(product.cover_image.blob_id), method:"delete", class: "button is-danger", data:{confirm:"確認刪除?"} -->
     </div>
 
     <hr>

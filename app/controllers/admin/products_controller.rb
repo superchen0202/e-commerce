@@ -40,6 +40,13 @@ class Admin::ProductsController < Admin::BaseController
 
     end
 
+
+    # def delete_attachment
+    #     @product_cover_image = ActiveStorage::Blob.find_signed(params[:id])
+    #     @product_cover_image.purge_later
+    #     redirect_to edit_admin_product_path, notice: "圖檔刪除成功!"
+    # end
+
     private
     def find_product
         @product = Product.friendly.find(params[:id])
