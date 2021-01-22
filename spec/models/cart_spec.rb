@@ -6,7 +6,7 @@ RSpec.describe Cart, type: :model do
     
         it "可以把商品丟購物車，購物車就會有東西" do
           cart = Cart.new
-          cart.add_items(1)
+          cart.add_items(2)
           expect(cart.emtpy?).to be false    
         end
     
