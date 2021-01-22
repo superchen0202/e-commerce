@@ -1,7 +1,7 @@
 class Cart
 
     #attr_reader :items
-
+    #初始化和取得實體變數值的基本設定
     def initialize
         @items = []
     end
@@ -9,6 +9,9 @@ class Cart
     def items
         return @items
     end
+
+
+    #購物車提供的相關方法
 
     def add_items(product_id, quantity = 1)
         

@@ -9,7 +9,12 @@ class CartItem
 
     def increament!( n = 1)
         @quantity = @quantity + n 
+        return @quantity
     end
 
+    
+    def product
+        return Product.find_by(id: product_id)
+    end
 
 end

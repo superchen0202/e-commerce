@@ -16,31 +16,28 @@ RSpec.describe Cart, type: :model do
             
             3.times{cart.add_items(7)}
             5.times{cart.add_items(4)}
+            2.times{cart.add_items(11)}
 
-            # p cart.items
-            # p cart.items.count
-            # p cart.items.amount
-            # p cart.items.first
-            # p cart.items.last
-
-            expect(cart.items.count).to be 2                #只有7號商品跟2號商品
-            expect(cart.items.first.quantity).to be 3
+            expect(cart.items.count).to be 3                #只有7號商品、4號商品跟11號商品3種商品 ==> 陣列中只存3種元素
+            expect(cart.items.last.quantity).to be 2
 
         end
-    
 
+        it "商品可以放到購物車裡，也可以再拿出來" do 
+            cart = Cart.new
 
+            v1 = Vendor.create(title: "555")
+            p1 = Product.create(name: "66" , list_price: 7, sell_price: 5, vendor: v1)
+            
+            cart.add_items(p1.id)
+            expect(cart.items.first.product).to be_a Product
+            # != expect(cart.items.first.product).to kind_of Product
 
-
-
+        end
       end 
     
 
-
-
-
       describe "進階功能" do 
       end
-
 
 end
