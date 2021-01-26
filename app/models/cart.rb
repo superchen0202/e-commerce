@@ -33,14 +33,15 @@ class Cart
 
     def total_price
         
-        total = 0
+        # @items.reduce(0) { |sum, item| sum = sum + item.amount }
+
+        total_amount
 
         @items.each do |item|
-           total = total_amount + item.amount
+           total_amount = total_amount + item.amount
         end
 
-        return total
-        
+        return total_amount
     end
     
 end

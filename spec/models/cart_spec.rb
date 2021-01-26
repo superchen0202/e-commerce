@@ -63,7 +63,6 @@ RSpec.describe Cart, type: :model do
             cart.add_items(p1.id, 3)            # amount = 15 = 3 * 5
             cart.add_items(p2.id, 7)            # amount = 63 = 7 * 9
 
-
             expect(cart.total_price).to eq 78
 
         end 
