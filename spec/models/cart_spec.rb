@@ -26,14 +26,27 @@ RSpec.describe Cart, type: :model do
         it "商品可以放到購物車裡，也可以再拿出來" do 
             
             cart = Cart.new
-            p1 = create(:product)
+            p1 = FactoryBot.create(:product)
             
             cart.add_items(p1.id)
             
             expect(cart.items.first.product).to be_a Product    # != expect(cart.items.first.product).to kind_of Product
         end
 
-        
+        it "每個 Cart Item 都可以計算它自己的金額(小計)" do
+            
+            cart = Cart.new
+
+            p1 = FactoryBot.create(:product, sell_price: 5)
+            p2 = FactoryBot.create(:product, sell_price: 9)
+                        
+            cart.add_items(p1.id, 3)
+            cart.add_items(p2.id, 7)
+
+            expect(cart.items.first.amount).to eq 15        # 3 * 5
+            expect(cart.items.last.amount).to eq 63         # 7 * 9
+
+        end
 
 
       end 

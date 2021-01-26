@@ -17,4 +17,8 @@ class CartItem
         return Product.find_by(id: product_id)
     end
 
+    def amount
+        return product.sell_price * @quantity
+    end
+
 end
