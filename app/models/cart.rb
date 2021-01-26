@@ -46,16 +46,16 @@ class Cart
 
     def to_hash
 
-        #how to insert value into hash in ruby in loop
-
+        # items = @items.map{ |item| {"product_id": item.product_id, "quantity": item.quantity}}
+        # return cart_hash = {"items": items}
+        
         item_content = []
         
         items.each do |item|
-            item_content << {product_id: item.product_id, quantity: item.quantity}
-            # item_content.push( {product_id: item.product_id, quantity: item.quantity} )
+            item_content << {"product_id": item.product_id, "quantity": item.quantity}
         end
 
-        output = {items: item_content}
+        output = {"items": item_content}
 
         return output
 

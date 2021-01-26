@@ -94,8 +94,8 @@ RSpec.describe Cart, type: :model do
 
             cart_content_hash = {
                 items: [
-                    {product_id: 2, quantity: 3}, 
-                    {product_id: 4, quantity: 7}
+                    {"product_id": 2, "quantity": 3}, 
+                    {"product_id": 4, "quantity": 7}
                 ]
             }
 
