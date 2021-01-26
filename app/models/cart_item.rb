@@ -18,7 +18,8 @@ class CartItem
     end
 
     def amount
-        return product.sell_price * @quantity
+        @product = product
+        return @product.sell_price * @quantity
     end
 
 end
