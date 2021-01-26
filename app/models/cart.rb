@@ -20,7 +20,7 @@ class Cart
         if found
             found.increament!(quantity)
         else
-            @items.push(CartItem.new(product_id, quantity))
+            @items.push(CartItem.new(product_id, quantity)) # cart.items.first.product_id
         end
 
         return @items
@@ -35,7 +35,7 @@ class Cart
         
         # @items.reduce(0) { |sum, item| sum = sum + item.amount }
 
-        total_amount
+        total_amount = 0
 
         @items.each do |item|
            total_amount = total_amount + item.amount
@@ -43,5 +43,35 @@ class Cart
 
         return total_amount
     end
-    
+
+    def to_hash
+
+        #how to insert value into hash in ruby in loop
+
+        item_content = []
+        
+        items.each do |item|
+            item_content << {product_id: item.product_id, quantity: item.quantity}
+            # item_content.push( {product_id: item.product_id, quantity: item.quantity} )
+        end
+
+        output = {items: item_content}
+
+        return output
+
+    end
+
+    def special
+
+        t = Time.now
+        res =""              # res = t.strftime("%m/%d")
+        
+        if t.strftime("%m/%d") == "12/25"
+            res = "Nice"
+        else
+            res = "bad"
+        end
+
+        return res
+    end
 end

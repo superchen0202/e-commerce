@@ -65,12 +65,50 @@ RSpec.describe Cart, type: :model do
 
             expect(cart.total_price).to eq 78
 
-        end 
+        end
+
+        #case 6...TBD
+        it "特別活動可搭配折扣(例如聖誕節的時候全面打 9 折，或是滿額滿千送百或滿額免運費)" do
+
+            # cart = Cart.new
+            # p1 = FactoryBot.create(:product, sell_price: 5)
+            # cart.add_items(p1.id, 7)
+            # p cart.special
+        end
 
       end 
 
 
-      describe "進階功能" do 
+      describe "進階功能" do
+
+        #case 1
+        it "可以將購物車內容轉換成 Hash 並存到 Session 裡" do
+            cart = Cart.new
+
+            p1 = FactoryBot.create(:product)
+            p2 = FactoryBot.create(:product)
+
+
+            cart.add_items(2, 3)
+            cart.add_items(4, 7)
+
+            cart_content_hash = {
+                items: [
+                    {product_id: 2, quantity: 3}, 
+                    {product_id: 4, quantity: 7}
+                ]
+            }
+
+            p cart.to_hash
+
+            expect(cart.to_hash).to eq cart_content_hash 
+            
+        end
+
+        #case 2
+        it "也可以存放在 Session 的內容(Hash 格式)，還原成購物車的內容"do
+        end
+
       end
 
 end
