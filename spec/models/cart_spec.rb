@@ -26,12 +26,16 @@ RSpec.describe Cart, type: :model do
         it "商品可以放到購物車裡，也可以再拿出來" do 
             
             cart = Cart.new
-            p1 = FactoryBot.create(:product)
+            p1 = create(:product)
             
             cart.add_items(p1.id)
             
             expect(cart.items.first.product).to be_a Product    # != expect(cart.items.first.product).to kind_of Product
         end
+
+        
+
+
       end 
 
 
