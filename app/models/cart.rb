@@ -74,4 +74,17 @@ class Cart
 
         return res
     end
+
+    def self.to_array(cart_hash)
+
+        cart_array = Cart.new
+
+        cart_hash[:items].each do |item|
+            cart_array.items.push(CartItem.new(item[:product_id], item[:quantity]))
+        end
+
+        return cart_array
+
+    end
+
 end

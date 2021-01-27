@@ -87,27 +87,35 @@ RSpec.describe Cart, type: :model do
 
             p1 = FactoryBot.create(:product)
             p2 = FactoryBot.create(:product)
-
-
+            
             cart.add_items(2, 3)
             cart.add_items(4, 7)
 
-            cart_content_hash = {
-                items: [
-                    {"product_id": 2, "quantity": 3}, 
-                    {"product_id": 4, "quantity": 7}
-                ]
-            }
+            # p cart.to_hash
 
-            p cart.to_hash
-
-            expect(cart.to_hash).to eq cart_content_hash 
+            expect(cart.to_hash).to eq cart_hash
             
         end
 
         #case 2
-        it "也可以存放在 Session 的內容(Hash 格式)，還原成購物車的內容"do
+        it "也可以存放在 Session 的內容(Hash 格式)，還原成購物車的內容" do
+            
+            cart = Cart.to_array(cart_hash)
+            expect(cart.items.first.quantity).to eq 3
+
         end
+
+      end
+
+
+      def cart_hash
+        
+        return cart_content = {
+            items: [
+                {"product_id": 2, "quantity": 3}, 
+                {"product_id": 4, "quantity": 7}
+            ]
+        }
 
       end
 
