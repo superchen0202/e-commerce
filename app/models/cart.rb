@@ -2,8 +2,8 @@ class Cart
 
     #attr_reader :items
     #初始化和取得實體變數值的基本設定
-    def initialize
-        @items = []
+    def initialize( items = [])
+        @items = items
     end
 
     def items
@@ -75,16 +75,21 @@ class Cart
         return res
     end
 
-    def self.to_array(cart_hash)
+    def self.to_array(cart_hash = nil)
 
-        cart_array = Cart.new
+        if cart_hash == nil
+            Cart.new
+        else
 
-        cart_hash[:items].each do |item|
-            cart_array.items.push(CartItem.new(item[:product_id], item[:quantity]))
+            cart_array = Cart.new
+
+            cart_hash[:items].each do |item|
+                cart_array.items.push(CartItem.new(item[:product_id], item[:quantity]))
+            end
+
+            return cart_array
         end
-
-        return cart_array
-
+        
     end
 
 end
