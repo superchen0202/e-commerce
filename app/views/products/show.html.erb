@@ -40,7 +40,7 @@
 
           <div class="column is-9 field is-grouped">
             <div class="select is-fullwidth is-grouped">
-              <select><%= options_for_select(@product.skus.map{ |p| [p.spec, p.id]}) %></select>
+              <select data-product-target="sku" > <%= options_for_select(@product.skus.map{ |p| [p.spec, p.id]}) %></select>
             </div>
           </div>
 
@@ -62,7 +62,7 @@
 
     <% end %>
 
-      <a href="#" class="button is-primary is-medium is-fullwidth">加到購物車</a>
+      <a href="#" class="button is-primary is-medium is-fullwidth" data-action="product#add_to_cart">加到購物車</a>
     </div>
 
   </div>

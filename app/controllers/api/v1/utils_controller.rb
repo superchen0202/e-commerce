@@ -1,5 +1,6 @@
 class Api::V1::UtilsController < ApplicationController
 
+    # subscribe api
     def subscribe
         email = params["subscribe"]["email"]
 
@@ -10,6 +11,11 @@ class Api::V1::UtilsController < ApplicationController
         else        
             render json:{ status: "Duplicated", email: email}
         end 
+    end
+
+    # cart api
+    def cart
+        render json: params
     end
 
 end
