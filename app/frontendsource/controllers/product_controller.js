@@ -3,7 +3,7 @@ import Rails from "@rails/ujs"
 
 export default class extends Controller {
   
-  static targets = [ "quantity", "sku" ]
+  static targets = [ "quantity", "sku", "cartButton" ]
 
 //   connect() {
 //     console.log("I see a big girl");
@@ -19,7 +19,6 @@ export default class extends Controller {
     
    // console.log(this.quantityTarget.value);
   }
-
 
   minus_quantity(event){
    
@@ -46,29 +45,39 @@ export default class extends Controller {
     let product_skus = this.skuTarget.value;
 
     //packing data to send to backend API
-    let data = new FormData();
-    data.append("product_id", product_id);
-    data.append("product_quantity", product_quantity);
-    data.append("product_skus", product_skus);
+    let cart_details = new FormData();
+    cart_details.append("product_id", product_id);
+    cart_details.append("product_quantity", product_quantity);
+    cart_details.append("product_skus", product_skus);
 
+    // check value of form to send
     // for (let value of data) {
     //     console.log(value);
     //  }
-    
+
+    let button =  this.cartButtonTarget;
+    button.classList.add("is-loading");
 
     //API
     Rails.ajax({
         
         url: "/api/v1/cart",
         type: "POST",
-        data: data,
+        data: cart_details,
+       
         success: (response) =>{
-            console.log(response);
+            
+            console.log(response);    
         }, 
 
         error: (err) =>{
+
             console.log(err);
         },
+
+        complete: () => {
+            button.classList.remove("is-loading");
+        }
 
     })
 
