@@ -22,7 +22,7 @@
       </article>
     </div>
 
-    <div class="column is-5">
+    <div class="column is-5" data-controller="product" data-product-id = "<%= @product.code %>">
       
       <h3 class="has-text-grey-light"><%= @product.vendor.title %></h3>
       <h2 class="title is-4"><%= @product.name %></h2>
@@ -30,8 +30,6 @@
       原價：<span class= "list-price has-text-primary is-size-4"><%= @product.list_price %></span></br>
       特價：<span class= "sell-price has-text-primary is-size-4"><%= @product.sell_price %></span>
       <hr>
-      
-
       
     <% if @product.skus.any? %>
         
@@ -53,10 +51,11 @@
           <div class="column is-3 is-size-4 has-text-right">數量</div>
 
           <div class="column is-9 field is-grouped">
-            <a href="#" class="button is-white is-medium">-</a>
-            <input type="number" name="quantity" class="input is-medium has-text-centered" value="1">
-            <a href="#" class="button is-white is-medium">+</a>
-          </div>  
+            <a href="#" class="button is-white is-medium" data-action="product#minus_quantity">-</a>
+            <input type="number" name="quantity" class="input is-medium has-text-centered" value="1" data-product-target="quantity">
+            <a href="#" class="button is-white is-medium" data-action="product#add_quantity">+</a>
+          </div> 
+
         </div>
 
       </div>
@@ -65,5 +64,7 @@
 
       <a href="#" class="button is-primary is-medium is-fullwidth">加到購物車</a>
     </div>
+
   </div>
+
 </section>
