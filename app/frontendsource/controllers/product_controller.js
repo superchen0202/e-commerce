@@ -58,31 +58,37 @@ export default class extends Controller {
     let button =  this.cartButtonTarget;
     button.classList.add("is-loading");
 
-    //API
-    Rails.ajax({
-        
-        url: "/api/v1/cart",
-        type: "POST",
-        data: cart_details,
-       
-        success: (response) =>{
-            
-            console.log(response);    
-        }, 
+    console.log("product_skus:", product_id);
+    console.log("product_quantity:", product_quantity);
+    console.log("product_skus:", product_skus);
 
-        error: (err) =>{
+    if (product_id && product_skus && product_quantity){
+        
+        //API
+        Rails.ajax({
+            
+          url: "/api/v1/cart",
+          type: "POST",
+          data: cart_details,
+        
+          success: (response) =>{
+              
+              console.log(response);    
+          }, 
+
+          error: (err) =>{
 
             console.log(err);
-        },
+          },
 
-        complete: () => {
-            button.classList.remove("is-loading");
-        }
+          complete: () => {
+              button.classList.remove("is-loading");
+          }
 
-    })
+        })
 
- 
+    }
+    
    }
-
 
 }
