@@ -21,9 +21,9 @@ RSpec.describe Cart, type: :model do
             
             cart.add_items(7, 3)                      # 3.times{cart.add_items(7)}
             cart.add_items(4, 5)                      # 5.times{cart.add_items(4)}
-            cart.add_items(11, 2)                    # 2.times{cart.add_items(11)}
+            cart.add_items(11, 2)                     # 2.times{cart.add_items(11)}
 
-            expect(cart.items.count).to be 3                #只有7號商品、4號商品跟11號商品3種商品 ==> 陣列中只存3種元素
+            expect(cart.items.count).to be 3          # 只有7號商品、4號商品跟11號商品3種商品 ==> 陣列中只存3種元素
             expect(cart.items.last.quantity).to be 2
 
         end
@@ -103,7 +103,9 @@ RSpec.describe Cart, type: :model do
         #case 2
         it "也可以存放在 Session 的內容(Hash 格式)，還原成購物車的內容" do
             
-            cart = Cart.to_array(cart_hash)
+            cart = Cart.from_hash(cart_hash)
+
+            #p cart.items
             expect(cart.items.first.quantity).to eq 3
 
         end

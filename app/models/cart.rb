@@ -14,18 +14,27 @@ class Cart
     #購物車提供的相關方法
 
     def add_items(product_id, quantity = 1)
-        
-        found = @items.find{|cart_item| cart_item.product_id == product_id}
+   
+        # @items.each do |cart_item|
+        #     if cart_item.product_id == product_id
+        #         cart_item.increament!(quantity)
+        #     else
+        #         @items.push(CartItem.new(product_id, quantity)) # cart.items.first.product_id
+        #     end
+        # end
 
+        # return @items
+
+
+        found = @items.find{ |cart_item| cart_item.product_id == product_id}
+        
         if found
             found.increament!(quantity)
         else
             @items.push(CartItem.new(product_id, quantity)) # cart.items.first.product_id
         end
 
-        return @items
     end
-
 
     def emtpy?
        return  @items.empty?
@@ -44,23 +53,7 @@ class Cart
         return total_amount
     end
 
-    def to_hash
-
-        # items = @items.map{ |item| {"product_id": item.product_id, "quantity": item.quantity}}
-        # return cart_hash = {"items": items}
-        
-        item_content = []
-        
-        items.each do |item|
-            item_content << {"product_id": item.product_id, "quantity": item.quantity}
-        end
-
-        output = {"items": item_content}
-
-        return output
-
-    end
-
+    # To determine the special day for business discount 
     def special
 
         t = Time.now
@@ -75,19 +68,45 @@ class Cart
         return res
     end
 
-    def self.to_array(cart_hash = nil)
+    # [] => {}
+    def to_hash
 
-        if cart_hash == nil
-            Cart.new
+        # items = @items.map{ |item| {"product_id": item.product_id, "quantity": item.quantity}}
+        # return cart_hash = {"items": items}
+        
+        item_content = []
+        
+        items.each do |item|
+            item_content << { product_id: item.product_id, quantity: item.quantity}
+        end
+
+        output = { items: item_content}
+
+        return output
+
+    end
+
+    # {} => []
+    def self.from_hash(cart_hash = nil)
+
+        if cart_hash && cart_hash[:items]
+
+            #cart_array = Cart.new
+
+            # cart_hash[:items].each do |item|
+            #     cart_array.items.push(CartItem.new(item[:product_id], item[:quantity]))
+            # end
+
+            # return cart_array
+
+            items = cart_hash[:items].map {
+                |item| CartItem.new(item[:product_id], item[:quantity])
+            }
+
+            return Cart.new(items)
+
         else
-
-            cart_array = Cart.new
-
-            cart_hash[:items].each do |item|
-                cart_array.items.push(CartItem.new(item[:product_id], item[:quantity]))
-            end
-
-            return cart_array
+            Cart.new
         end
         
     end
