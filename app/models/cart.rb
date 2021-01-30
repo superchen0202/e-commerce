@@ -10,11 +10,11 @@ class Cart
         return @items
     end
 
-
     #購物車提供的相關方法
 
     def add_items(product_id, quantity = 1)
    
+        # My version
         # @items.each do |cart_item|
         #     if cart_item.product_id == product_id
         #         cart_item.increament!(quantity)
@@ -26,6 +26,7 @@ class Cart
         # return @items
 
 
+        #Teacher's version
         found = @items.find{ |cart_item| cart_item.product_id == product_id}
         
         if found
@@ -80,16 +81,16 @@ class Cart
             item_content << { product_id: item.product_id, quantity: item.quantity}
         end
 
-        output = { items: item_content}
+        cart_hash_type = { items: item_content}
 
-        return output
+        return cart_hash_type
 
     end
 
     # {} => []
-    def self.from_hash(cart_hash = nil)
+    def self.from_hash(cart_hash_type = nil)
 
-        if cart_hash && cart_hash[:items]
+        if cart_hash_type && cart_hash_type[:items]
 
             #cart_array = Cart.new
 
@@ -99,7 +100,7 @@ class Cart
 
             # return cart_array
 
-            items = cart_hash[:items].map {
+            items = cart_hash_type[:items].map {
                 |item| CartItem.new(item[:product_id], item[:quantity])
             }
 
