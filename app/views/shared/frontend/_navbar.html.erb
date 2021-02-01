@@ -40,6 +40,12 @@
 
                     <% if user_signed_in? %>
 
+                    <!-- shop cart -->
+                    <div class="navbar-item">
+                        <i class="fas fa-shopping-cart"></i>
+                        (<%= current_cart.items.count%>)
+                    </div>
+
                         <div class="navbar-item has-dropdown is-hoverable">
                             
                             <a class="navbar-link"><i class="fas fa-user"></i> &nbsp; <%= current_user.email %></a>

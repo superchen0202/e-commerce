@@ -30,7 +30,7 @@ class Cart
         found = @items.find{ |cart_item| cart_item.product_id == product_id}
         
         if found
-            found.increament!(quantity)
+            found.increment!(quantity)
         else
             @items.push(CartItem.new(product_id, quantity)) # cart.items.first.product_id
         end
@@ -78,10 +78,10 @@ class Cart
         item_content = []
         
         items.each do |item|
-            item_content << { product_id: item.product_id, quantity: item.quantity}
+            item_content << { "product_id"=> item.product_id, "quantity"=> item.quantity}
         end
 
-        cart_hash_type = { items: item_content}
+        cart_hash_type = { "items"=> item_content}
 
         return cart_hash_type
 
@@ -90,7 +90,7 @@ class Cart
     # {} => []
     def self.from_hash(cart_hash_type = nil)
 
-        if cart_hash_type && cart_hash_type[:items]
+        if cart_hash_type && cart_hash_type["items"]
 
             #cart_array = Cart.new
 
@@ -100,8 +100,8 @@ class Cart
 
             # return cart_array
 
-            items = cart_hash_type[:items].map {
-                |item| CartItem.new(item[:product_id], item[:quantity])
+            items = cart_hash_type["items"].map { |item| 
+                CartItem.new(item["product_id"], item["quantity"])
             }
 
             return Cart.new(items)

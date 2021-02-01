@@ -21,11 +21,12 @@ RSpec.describe Cart, type: :model do
             
             cart.add_items(7, 3)                      # 3.times{cart.add_items(7)}
             cart.add_items(4, 5)                      # 5.times{cart.add_items(4)}
-            cart.add_items(7, 2)                    
+            cart.add_items(7, 19)                    
+            
 
-            #p cart
+            p cart
             expect(cart.items.count).to be 2          # 只有7號商品、4號商品跟2種商品 ==> 陣列中只存3種元素
-            expect(cart.items.last.quantity).to be 5
+            expect(cart.items.first.quantity).to be 22  # 3 + 19
 
         end
 
@@ -106,19 +107,27 @@ RSpec.describe Cart, type: :model do
             
             cart = Cart.from_hash(cart_hash)
 
-            #p cart.items
+            #p cart
             expect(cart.items.first.quantity).to eq 3
 
         end
 
+        private
         def cart_hash
         
-            return cart_content = {
-                items: [
-                    {"product_id": 2, "quantity": 3}, 
-                    {"product_id": 4, "quantity": 7}
+            # return cart_content = {
+            #     "items": [
+            #         {"product_id": 2, "quantity": 3}, 
+            #         {"product_id": 4, "quantity": 7}
+            #     ]
+            # }
+
+            {
+                "items" => [
+                  {"product_id" => 2, "quantity" => 3}, 
+                  {"product_id" => 4, "quantity" => 7}, 
                 ]
-            }
+              }
     
         end
 

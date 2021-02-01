@@ -20,11 +20,10 @@ class Api::V1::UtilsController < ApplicationController
 
         if product != nil
             
-            cart = Cart.from_hash(session[:cart_9527])
-            cart.add_items(product.code, params[:product_quantity])
-            session[:cart_9527] = cart.to_hash
+            current_cart.add_items(product.code, params[:product_quantity])
+            session[:cart_9527] = current_cart.to_hash
             
-            render json: { status: "OK", items: cart}
+            render json: { status: "OK", items: current_cart }
     
         else
             render json: { status: "X_X" }
