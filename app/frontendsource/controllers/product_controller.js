@@ -57,8 +57,10 @@ export default class extends Controller {
       // for (let value of cart_details) {
       //     console.log(value);
       // }
-
-    
+ 
+      // console.log(cart_details);
+     
+  
       // let button be loading and disabled while sending data to api 
       let button =  this.cartButtonTarget;
       button.classList.add("is-loading");
