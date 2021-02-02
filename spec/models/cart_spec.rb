@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Cart, type: :model do
 
-
     let(:cart){Cart.new}
 
     describe "基本功能" do 
@@ -23,7 +22,7 @@ RSpec.describe Cart, type: :model do
             cart.add_items(4, 5)                      # 5.times{cart.add_items(4)}
             cart.add_items(7, 19)                    
             
-            p cart
+            #p cart
             expect(cart.items.count).to be 2          # 只有7號商品、4號商品跟2種商品 ==> 陣列中只存3種元素
             expect(cart.items.first.quantity).to be 22  # 3 + 19
 
@@ -114,20 +113,20 @@ RSpec.describe Cart, type: :model do
         def cart_hash
         
             # my version
-            # return cart_content = {
-            #     "items": [
-            #         {"product_id": 2, "quantity": 3}, 
-            #         {"product_id": 4, "quantity": 7}
-            #     ]
-            # }
-
-            # teacher's code
-            {
-                "items" => [
-                  {"product_id" => 2, "quantity" => 3}, 
-                  {"product_id" => 4, "quantity" => 7}, 
+            return cart_content = {
+                "items"=> [
+                    {"product_id"=> 2, "quantity"=> 3}, 
+                    {"product_id"=> 4, "quantity"=> 7}
                 ]
             }
+
+            # teacher's code
+            # {
+            #     "items" => [
+            #       {"product_id" => 2, "quantity" => 3}, 
+            #       {"product_id" => 4, "quantity" => 7}, 
+            #     ]
+            # }
     
         end
 
