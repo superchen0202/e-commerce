@@ -14,6 +14,7 @@ class CartItem
     end
 
     def product
+        #黑人問號???
         Product.friendly.find(product_id)
     end
 

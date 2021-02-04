@@ -1,40 +1,46 @@
 <section class="section">
 
-    <h1 class="title">購物清單</h1>
+    <!-- Title name + clean button -->
+    <h1 class="title">
+        
+        購物清單
 
-    <table class="table is-fullwidth is-align">
-
-        <thead>
-            <tr>
-                <th>品項</th>
-                <th>單價</th>
-                <th>數量</th>
-                <th>小計</th>
-            </tr>    
-        </thead>
-    
-        <tbody>
-            
-            <% current_cart.items.each do |cart_item| %>
-     
-            <tr>
-                <td><%= cart_item.product.name %></td>
-                <td><%= cart_item.product.sell_price %></td>
-                <td><%= cart_item.quantity %></td>
-                <td><%= cart_item.amount %></td>
-            </tr>
-            
+        <% unless current_cart.empty? %>
+            <%= link_to cart_path, class: "button is-danger is-size-11", method:"delete", data: {confirm: "確定清空購物內容？"}  do  %>
+                    <i class="far fa-trash-alt"></i>
+                    <span >清空購物內容</span>        
             <% end %>
-    
-        </tbody>
-    
-        <tfoot>
-            <tr>
-                <td colspan="3">總價</td>
-                <td> <%= current_cart.total_price %></td>
-            </tr>
-        </tfoot>
-    
-    </table>
+        <% end %>
+    </h1>
+
+
+    <% unless current_cart.empty? %>
+        
+        <!-- Table of item to pay -->
+        <%= render 'itemstopay' %>
+
+    <% else %>
+
+        <article class="message">
+            <div class= "message-body">目前購物車是空的喔！</div>
+        </article>
+
+    <% end %>
+
+
+    <!-- button list -->
+    <div class="field is-align-items-flex-end">
+
+        <%= link_to "繼續選購", root_path, class: "button is-primary is-size-5" %> 
+
+        <% unless current_cart.empty? %>
+            
+            <%= link_to "前往結帳", checkout_cart_path, class: "button is-warning is-size-5" %> 
+        
+        <% end %>
+
+        
+        <!-- link_to "回上一頁", :back, class: "button is-link" -->
+    </div>
 
 </section>

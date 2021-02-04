@@ -94,7 +94,7 @@ class Cart
 
     end
 
-    def emtpy?
+    def empty?
        return  @items.empty?
     end
 

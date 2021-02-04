@@ -10,8 +10,14 @@ Rails.application.routes.draw do
   # /categories/2
   resources :categories, only: [:show, :destroy]
 
-  # cart /cart/
-  resource :cart , only: [:show]
+  # /cart
+  resource :cart , only: [:show, :destroy] do 
+    
+    # /cart/checkout
+    collection do
+      get :checkout
+    end
+  end
 
   namespace :admin do
 
