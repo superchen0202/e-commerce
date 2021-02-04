@@ -5,9 +5,9 @@ export default class extends Controller {
   
   static targets = [ "quantity", "sku", "cartButton" ]
 
-//   connect() {
-//     console.log("I see a big girl");
-//   }
+  //   connect() {
+  //     console.log("I see a big girl");
+  //   }
 
   
   add_quantity(event){
@@ -76,8 +76,20 @@ export default class extends Controller {
             data: cart_details,
           
             success: (response) =>{
+              
+              console.log(response);
+
+              if(response.status === "OK"){
+
+                //capture the data API responded 
+                let item_count = response.items || 0;
                 
-                console.log(response);    
+                //Cutomized the JS event, broadcast the event to controller of cart icon, update the item count of cart iconsynchronously
+                let evt = new CustomEvent("addToCart", {"detail": {item_count } });
+                document.dispatchEvent(evt);
+
+              }
+
             }, 
 
             error: (err) =>{

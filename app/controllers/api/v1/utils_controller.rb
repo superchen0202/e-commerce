@@ -23,7 +23,7 @@ class Api::V1::UtilsController < ApplicationController
             current_cart.add_items(product.code, params[:product_quantity])
             session[:cart_9527] = current_cart.to_hash
             
-            render json: { status: "OK", items: current_cart }
+            render json: { status: "OK", items: current_cart.items.count }
     
         else
             render json: { status: "X_X" }
