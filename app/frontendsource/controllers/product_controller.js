@@ -8,7 +8,6 @@ export default class extends Controller {
   //   connect() {
   //     console.log("I see a big girl");
   //   }
-
   
   add_quantity(event){
    

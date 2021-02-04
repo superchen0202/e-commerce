@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   
   root 'products#index'
@@ -9,7 +8,10 @@ Rails.application.routes.draw do
   resources :products, only: [:show, :index]
 
   # /categories/2
-  resources :categories, only: [:show]
+  resources :categories, only: [:show, :destroy]
+
+  # cart /cart/
+  resource :cart , only: [:show]
 
   namespace :admin do
 
@@ -26,7 +28,6 @@ Rails.application.routes.draw do
 
   end
 
-
   # api
   namespace :api do 
     namespace :v1 do
@@ -34,5 +35,7 @@ Rails.application.routes.draw do
       post 'cart', to: 'utils#cart'
     end
   end
+
+
 
 end
