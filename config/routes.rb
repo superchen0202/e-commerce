@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root 'products#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  resources :orders, except:[:new, :edit, :update, :destroy ]
+
   resources :products, only: [:show, :index]
 
   # /categories/2

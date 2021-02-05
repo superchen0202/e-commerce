@@ -1,4 +1,4 @@
 class OrderItem < ApplicationRecord
-  belongs_to :user
-  belongs_to :skus
+  belongs_to :order
+  belongs_to :sku
 end

@@ -6,7 +6,7 @@
     <hr>
     <h2 class="title is-5">收件人資訊</h2>
   
-    <%= form_with(model: @order) do |form| %>
+    <%= form_with(model: current_user.orders.build) do |form| %>
 
         <!--上排：姓名 + 電話 + 地址  -->
         <div class="columns">
@@ -14,8 +14,8 @@
             <!-- 收件人 -->
             <div class="column">
             <div class="field">
-                <%= form.label :recipient, '收件人', class: 'label' %>
-                <%= form.text_field :recipient, class: 'input is-medium' %>
+                <%= form.label :reciever, '收件人', class: 'label' %>
+                <%= form.text_field :reciever, class: 'input is-medium' %>
             </div>
             </div>
 
