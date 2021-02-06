@@ -21,7 +21,7 @@ class Cart
             #---Hash format to reference---
             #
             # {
-            #  "items" => [ {"product_id" => 2, "quantity" => 3}, {"product_id" => 4, "quantity" => 7}]
+            #  "items" => [ {"sku_id" => 2, "quantity" => 3}, {"sku_id" => 4, "quantity" => 7}]
             # }
 
             #----My Version---
@@ -29,7 +29,7 @@ class Cart
             cart_array_type = Cart.new
 
             cart_hash_type["items"].each do |item|
-                cart_array_type.items.push( CartItem.new(item["product_id"], item["quantity"]) )
+                cart_array_type.items.push( CartItem.new(item["sku_id"], item["quantity"]) )
             end
 
             return cart_array_type
@@ -37,7 +37,7 @@ class Cart
             # ---Teacher's Version---
 
             # items = cart_hash_type["items"].map { |item| 
-            #     CartItem.new(item["product_id"], item["quantity"])
+            #     CartItem.new(item["sku_id"], item["quantity"])
             # }
 
             # Cart.new(items)
@@ -52,14 +52,14 @@ class Cart
     def to_hash
 
         #---My Version---
-        # items = @items.map{ |item| {"product_id"=> item.product_id, "quantity"=> item.quantity}}
+        # items = @items.map{ |item| {"sku_id"=> item.sku_id, "quantity"=> item.quantity}}
         # return cart_hash = {"items"=> items}
         
         # --- My Version ---
         item_content = []
         
         items.each do |item|
-            item_content << { "product_id"=> item.product_id, "quantity"=> item.quantity}
+            item_content << { "sku_id"=> item.sku_id, "quantity"=> item.quantity}
         end
 
         cart_hash_type = { "items"=> item_content}
@@ -67,27 +67,26 @@ class Cart
         return cart_hash_type
         
         #---Teacher's Version---
-        # items = @items.map { |item| {"product_id" => item.product_id, 
+        # items = @items.map { |item| {"sku_id" => item.sku_id, 
         # "quantity" => item.quantity} }
         
         # { "items" => items }
 
     end
 
-
     #購物車提供的相關方法
-    def add_items(product_id, quantity = 1)
+    def add_sku(sku_id, quantity = 1)
    
         #Teacher's version
    
         quantity = quantity.to_i
    
-        found = @items.find{ |cart_item| cart_item.product_id == product_id}
+        found = @items.find{ |cart_item| cart_item.sku_id == sku_id}
         
         if found
             found.increment!(quantity)
         else
-            @items.push(CartItem.new(product_id, quantity)) # cart.items.first.product_id
+            @items.push(CartItem.new(sku_id, quantity)) # cart.items.first.sku_id
         end
 
         return @items

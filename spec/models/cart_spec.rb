@@ -9,8 +9,8 @@ RSpec.describe Cart, type: :model do
         #case 1
         it "可以把商品丟購物車，購物車就會有東西" do
             # cart = Cart.new
-            cart.add_items(1)
-            expect(cart.emtpy?).to be false    
+            cart.add_sku(1)
+            expect(cart.empty?).to be false    
         end
 
         #case 2
@@ -18,9 +18,9 @@ RSpec.describe Cart, type: :model do
             
             # cart = Cart.new
             
-            cart.add_items(7, 3)                      # 3.times{cart.add_items(7)}
-            cart.add_items(4, 5)                      # 5.times{cart.add_items(4)}
-            cart.add_items(7, 19)                    
+            cart.add_sku(7, 3)                      # 3.times{cart.add_sku(7)}
+            cart.add_sku(4, 5)                      # 5.times{cart.add_sku(4)}
+            cart.add_sku(7, 19)                    
             
             #p cart
             expect(cart.items.count).to be 2          # 只有7號商品、4號商品跟2種商品 ==> 陣列中只存3種元素
@@ -32,9 +32,9 @@ RSpec.describe Cart, type: :model do
         it "商品可以放到購物車裡，也可以再拿出來" do 
             
             # cart = Cart.new
-            p1 = FactoryBot.create(:product)
+            p1 = FactoryBot.create(:product, :with_skus)
             
-            cart.add_items(p1.id)
+            cart.add_sku(p1.skus.first.id)
             
             expect(cart.items.first.product).to be_a Product    # != expect(cart.items.first.product).to kind_of Product
         end
@@ -44,11 +44,11 @@ RSpec.describe Cart, type: :model do
             
             # cart = Cart.new
 
-            p1 = FactoryBot.create(:product, sell_price: 5)
-            p2 = FactoryBot.create(:product, sell_price: 9)
+            p1 = FactoryBot.create(:product, :with_skus, sell_price: 5)
+            p2 = FactoryBot.create(:product, :with_skus, sell_price: 9)
                         
-            cart.add_items(p1.id, 3)
-            cart.add_items(p2.id, 7)
+            cart.add_sku(p1.skus.first, 3)
+            cart.add_sku(p2.skus.first, 7)
 
             expect(cart.items.first.amount).to eq 15        # 3 * 5
             expect(cart.items.last.amount).to eq 63         # 7 * 9
@@ -60,11 +60,11 @@ RSpec.describe Cart, type: :model do
 
             # cart = Cart.new
 
-            p1 = FactoryBot.create(:product, sell_price: 5)
-            p2 = FactoryBot.create(:product, sell_price: 9)
+            p1 = FactoryBot.create(:product, :with_skus, sell_price: 5)
+            p2 = FactoryBot.create(:product, :with_skus,  sell_price: 9)
                         
-            cart.add_items(p1.id, 3)            # amount = 15 = 3 * 5
-            cart.add_items(p2.id, 7)            # amount = 63 = 7 * 9
+            cart.add_sku(p1.skus.first, 3)            # amount = 15 = 3 * 5
+            cart.add_sku(p2.skus.first, 7)            # amount = 63 = 7 * 9
 
             expect(cart.total_price).to eq 78
 
@@ -75,7 +75,7 @@ RSpec.describe Cart, type: :model do
 
             # cart = Cart.new
             # p1 = FactoryBot.create(:product, sell_price: 5)
-            # cart.add_items(p1.id, 7)
+            # cart.add_sku(p1.id, 7)
             # p cart.special
         end
 
@@ -91,8 +91,8 @@ RSpec.describe Cart, type: :model do
             p1 = FactoryBot.create(:product)
             p2 = FactoryBot.create(:product)
             
-            cart.add_items(2, 3)
-            cart.add_items(4, 7)
+            cart.add_sku(2, 3)
+            cart.add_sku(4, 7)
 
             # p cart.to_hash
 
@@ -115,16 +115,16 @@ RSpec.describe Cart, type: :model do
             # my version
             return cart_content = {
                 "items"=> [
-                    {"product_id"=> 2, "quantity"=> 3}, 
-                    {"product_id"=> 4, "quantity"=> 7}
+                    {"sku_id"=> 2, "quantity"=> 3}, 
+                    {"sku_id"=> 4, "quantity"=> 7}
                 ]
             }
 
             # teacher's code
             # {
             #     "items" => [
-            #       {"product_id" => 2, "quantity" => 3}, 
-            #       {"product_id" => 4, "quantity" => 7}, 
+            #       {"sku_id" => 2, "quantity" => 3}, 
+            #       {"sku_id" => 4, "quantity" => 7}, 
             #     ]
             # }
     
