@@ -16,11 +16,15 @@ class Api::V1::UtilsController < ApplicationController
     # cart api
     def cart
 
-        product = Product.friendly.find(params[:product_id])
+        # old version for add_items
+        #product = Product.friendly.find(params[:product_id])
+
+        product = Product.joins(:skus).find_by(skus:{ id: params[:product_skus]})
+
 
         if product != nil
             
-            current_cart.add_items(product.code, params[:product_quantity])
+            current_cart.add_sku(params[:product_skus], params[:product_quantity])
             session[:cart_9527] = current_cart.to_hash
             
             render json: { status: "OK", items: current_cart.items.count }

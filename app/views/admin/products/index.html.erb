@@ -29,7 +29,7 @@
         <td><%= product.code %></td>
         <td><%= image_tag product.cover_image.variant(resize: "250x250") if product.cover_image.attached?  %></td>
         <td><%= product.description %></td>
-        <td><%= product.vendor.title %></td>
+        <td><%= product.vendor&.title %></td>
         <td><%= product.list_price %> / <%= product.sell_price %></td>
         <td><%= product.on_sell %></td>
        

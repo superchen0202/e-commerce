@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
         @order = current_user.orders.build(order_params)
 
         current_cart.items.each do |item|
-            @order.order_items.build(sku_id: 36, quantity: item.quantity)
+            @order.order_items.build(sku_id: item.sku_id, quantity: item.quantity)
         end
 
         if @order.save
