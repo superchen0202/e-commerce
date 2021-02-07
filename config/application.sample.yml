@@ -10,5 +10,10 @@
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
+#---Google---
 GOOGLE_CLIENT_ID: "883747275750-b1gahvciq0mblk3o5rtsclu77lg8mhdg.apps.googleusercontent.com"
 GOOGLE_CLIENT_SECRET: "NrWTY6XXWA1TwKx45pkNxd89"
+
+#---Line Pay---
+Line _Pay_Channel_ID: "1655648357"
+Line _Pay_Channel_Secret_Key: "4a12296b07a203f9515577b7e8b0ca90"
