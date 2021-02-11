@@ -1,6 +1,7 @@
 class Admin::ProductsController < Admin::BaseController
 
     before_action :find_product, only:[:edit, :update, :destroy]
+    before_action :check_admin 
 
     def index
         @products = Product.order("created_at DESC").includes(:vendor, :category).page params[:page]
@@ -50,6 +51,13 @@ class Admin::ProductsController < Admin::BaseController
     private
     def find_product
         @product = Product.friendly.find(params[:id])
+    end
+
+    def check_admin
+
+        unless current_user.admin?
+            redirect_to root_path, notice: "您無權限查看管理者頁面"
+        end
     end
 
     def products_params
