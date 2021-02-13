@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
     before_action :authenticate_user!
-    
+
 
     def create
 
@@ -12,7 +12,8 @@ class OrdersController < ApplicationController
         end
 
         if @order.save
-            redirect_to root_path, notice: "OK"
+            render html: params
+            #redirect_to orders_path, notice: "OK"
         else
             render "carts/checkout"
         end

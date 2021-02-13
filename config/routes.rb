@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'products#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :orders, except:[:new, :edit, :update, :destroy ]
+  resources :orders #, except:[:new, :edit, :update, :destroy ]
 
   resources :products, only: [:show, :index]
 
@@ -43,7 +43,5 @@ Rails.application.routes.draw do
       post 'cart', to: 'utils#cart'
     end
   end
-
-
 
 end
