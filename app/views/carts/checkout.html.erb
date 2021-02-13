@@ -83,22 +83,24 @@
         alert("確認購物內容?");
       } );
 
-    })
 
-    // braintree.client.create({
+      braintree.client.create({
       
-    //    authorization: CLIENT_TOKEN_FROM_SERVER,
-    //    container: '#dropin-container'
-    //   })
+       authorization: CLIENT_TOKEN_FROM_SERVER,
+       container: '#dropin-container'
+      })
 
-    //       .then((dropinInstance) => {
+        .then((dropinInstance) => {
+          //...
+        })
         
-    //       })
-          
-    //       .catch((error) => {
-    //       }
+        .catch((error) => {
+            //...
+        }
 
-    // );
+      );
+
+    })
 
   </script>  
   

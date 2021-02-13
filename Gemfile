@@ -26,6 +26,7 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'image_processing', '~> 1.2'
 gem 'acts_as_list', '~> 0.7.2'
 gem 'timecop', '~> 0.9.2'
+gem 'braintree', '~> 3.2'
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
