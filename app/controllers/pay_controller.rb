@@ -39,6 +39,7 @@ class PayController < ApplicationController
         )
      
         if result.success?
+            session[:cart_9527] = nil
             redirect_to root_path, notice: '付費成功'
         else
             redirect_to root_path, notice: '付費發生錯誤'
