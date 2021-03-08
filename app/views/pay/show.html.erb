@@ -6,47 +6,51 @@
 
 <body>
 
-    <!-- 購物明細 -->
-    <table class="table is-align">
+    <section class="container">
 
-        <thead>
-            <tr>
-                <th>品項</th>
-                <th>單價</th>
-                <th>數量</th>
-                <th>小計</th>
-            </tr>    
-        </thead>
-
-        <% @order.order_items.each do |order_item| %>
-            <tbody>
-                <tr>
-                    <td><%= order_item.sku.product.name %></td>
-                    <td><%= order_item.sku.product.sell_price %></td>
-                    <td><%= order_item.quantity %></td>    
-                    <td><%= order_item.quantity * order_item.sku.product.sell_price %></td>
-                </tr>
-            </tbody>
-        <% end %>
-    
-        <tfoot>
-            <tr>
-                <td colspan="3">總價</td>
-                <td> <%= @order_total_price %></td>
-            </tr>
-        </tfoot>
-
-    </table>
-
-    <!-- 刷卡機表單 -->
-    <%= form_with url: payment_pay_path(@order), id: "payment-form", method: "post", local:true do |form| %>
-        <%= form.hidden_field :payment_nonce %>
-        <div id="dropin-container"></div>
-        <%= link_to "重新考慮", root_path, class:"button is-primary" %>
+        <h1 class="title">購物明細</h1>
         
-        <button id="submit-button" class="button is-danger">結帳！</button>
-    <% end %>
-
+        <table class="table is-align">
+    
+            <thead>
+                <tr>
+                    <th>品項</th>
+                    <th>單價</th>
+                    <th>數量</th>
+                    <th>小計</th>
+                </tr>    
+            </thead>
+    
+            <% @order.order_items.each do |order_item| %>
+                <tbody>
+                    <tr>
+                        <td><%= order_item.sku.product.name %></td>
+                        <td><%= order_item.sku.product.sell_price %></td>
+                        <td><%= order_item.quantity %></td>    
+                        <td><%= order_item.quantity * order_item.sku.product.sell_price %></td>
+                    </tr>
+                </tbody>
+            <% end %>
+        
+            <tfoot>
+                <tr>
+                    <td colspan="3">總價</td>
+                    <td> <%= @order_total_price %></td>
+                </tr>
+            </tfoot>
+    
+        </table>
+    
+        <!-- 刷卡機表單 -->
+        <%= form_with url: payment_pay_path(@order), id: "payment-form", method: "post", local:true do |form| %>
+            <%= form.hidden_field :payment_nonce %>
+            <div id="dropin-container"></div>
+            <%= link_to "重新考慮", root_path, class:"button is-primary" %>
+            
+            <button id="submit-button" class="button is-danger">結帳！</button>
+        <% end %>
+        
+    </section>
 </body>
 
 <!-- Use the components. We'll see usage instructions next. -->
