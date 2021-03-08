@@ -2,9 +2,8 @@ class OrdersController < ApplicationController
 
     before_action :authenticate_user!
 
-
     def create
-
+    
         @order = current_user.orders.build(order_params)
 
         current_cart.items.each do |item|
@@ -12,17 +11,17 @@ class OrdersController < ApplicationController
         end
 
         if @order.save
-            render html: params
-            #redirect_to orders_path, notice: "OK"
+            #render json: params
+            redirect_to pay_path(@order), notice: "OK"
         else
             render "carts/checkout"
         end
-    end
+    end 
 
     private
 
     def order_params        
         params.require(:order).permit(:receipent, :tel, :address, :note)
     end
-    
+
 end

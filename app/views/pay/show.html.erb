@@ -1,0 +1,92 @@
+<head>
+    <meta charset="utf-8">
+    <script src="https://js.braintreegateway.com/web/dropin/1.26.1/js/dropin.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- 購物明細 -->
+    <table class="table is-align">
+
+        <thead>
+            <tr>
+                <th>品項</th>
+                <th>單價</th>
+                <th>數量</th>
+                <th>小計</th>
+            </tr>    
+        </thead>
+
+        <% @order.order_items.each do |order_item| %>
+            <tbody>
+                <tr>
+                    <td><%= order_item.sku.product.name %></td>
+                    <td><%= order_item.sku.product.sell_price %></td>
+                    <td><%= order_item.quantity %></td>    
+                    <td><%= order_item.quantity * order_item.sku.product.sell_price %></td>
+                </tr>
+            </tbody>
+        <% end %>
+    
+        <tfoot>
+            <tr>
+                <td colspan="3">總價</td>
+                <td> <%= @order_total_price %></td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+    <!-- 刷卡機表單 -->
+    <%= form_with url: payment_pay_path(@order), id: "payment-form", method: "post", local:true do |form| %>
+        <%= form.hidden_field :payment_nonce %>
+        <div id="dropin-container"></div>
+        <%= link_to "重新考慮", root_path, class:"button is-primary" %>
+        
+        <button id="submit-button" class="button is-danger">結帳！</button>
+    <% end %>
+
+</body>
+
+<!-- Use the components. We'll see usage instructions next. -->
+<script type = "text/javascript">
+   
+    document.addEventListener("turbolinks:load", function(event){
+
+        let button = document.querySelector("#submit-button");
+        
+        button.addEventListener("click", (evt) =>{
+            alert("確認購物內容?");
+        });
+
+        // console.log(braintree);
+        braintree.dropin.create({
+            authorization: "<%= @client_token %>",
+            container: '#dropin-container'
+        })
+
+        .then((dropinInstance) => {
+
+            button.addEventListener('click', (event) => {
+            
+            event.preventDefault();  
+            dropinInstance.requestPaymentMethod()
+              
+            .then((payload) => {
+                document.getElementById('payment_nonce').value = payload.nonce;
+                let form = document.querySelector("#payment-form");
+                console.log(form);
+                form.submit();
+            })
+              
+            .catch((error) => { throw error; });
+            
+            });
+        })
+        
+        .catch((error) => {});
+
+    })
+  
+</script>    

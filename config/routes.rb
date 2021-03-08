@@ -8,18 +8,28 @@ Rails.application.routes.draw do
   resources :orders #, except:[:new, :edit, :update, :destroy ]
 
   resources :products, only: [:show, :index]
+  
+  resources :pay do
 
+    member do
+      post :payment
+    end
+
+  end
+  
   # /categories/2
   resources :categories, only: [:show, :destroy]
 
   # /cart
-  resource :cart , only: [:show, :destroy] do 
+  resource :cart do 
     
     # /cart/checkout
     collection do
       get :checkout
     end
   end
+
+
 
   namespace :admin do
 

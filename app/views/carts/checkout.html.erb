@@ -1,107 +1,54 @@
-<head>
-
-  <meta charaset ="utf-8"> 
-  <!-- Load the required client component. -->
-  <script src="https://js.braintreegateway.com/web/3.72.0/js/client.min.js"></script>
-</head>
-
-
-<body>
-
-  <section class="section">
-    
-    <h1 class="title">結帳</h1>
-    <%= render 'carts/itemstopay' %>
-
-    <hr>
-
-    
-    <!-- 線上刷卡機 -->
-    <h2 class="title is-5">收件人資訊</h2>
+<section class="section">
   
-    <%= form_with(model: current_user.orders.build) do |form| %>
+  <h1 class="title">結帳</h1>
+  <%= render 'carts/itemstopay' %>
 
-        <!--上排：姓名 + 電話 + 地址  -->
-        <div class="columns">
-            
-            <!-- 收件人 -->
-            <div class="column">
-              <div class="field">
-                  <%= form.label :receipent, '收件人', class: 'label' %>
-                  <%= form.text_field :receipent, class: 'input is-medium' %>
-              </div>
-            </div>
+  <hr>
 
-            <!-- 電話 -->
-            <div class="column">
-              <div class="field">
-                  <%= form.label :tel, '電話', class: 'label' %>
-                  <%= form.text_field :tel, class: 'input is-medium' %>
-              </div>
-            </div>
+  <h2 class="title is-5">收件人資訊</h2>
 
-            <!-- 地址 -->
-            <div class="column">
-              <div class="field">
-                  <%= form.label :address, '地址', class: 'label' %>
-                  <%= form.text_field :address, class: 'input is-medium' %>
-              </div>
-            </div>
+  <%= form_with(model: current_user.orders.build) do |form| %>
 
+    <!--上排：姓名 + 電話 + 地址  -->
+    <div class="columns">
+        
+        <!-- 收件人 -->
+        <div class="column">
+          <div class="field">
+              <%= form.label :receipent, '收件人', class: 'label' %>
+              <%= form.text_field :receipent, class: 'input is-medium' %>
+          </div>
         </div>
 
-      <!-- 下排：備註 -->
-      <div class="field">
-        <%= form.label :note, '備註說明', class: 'label' %>
-        <%= form.text_area :note, class: 'textarea is-medium' %>
-      </div>
+        <!-- 電話 -->
+        <div class="column">
+          <div class="field">
+              <%= form.label :tel, '電話', class: 'label' %>
+              <%= form.text_field :tel, class: 'input is-medium' %>
+          </div>
+        </div>
 
-      <!-- Hidden form fied for nocne to send to the server -->
-      <%= form.hidden_field :payment_nonce %>
-   
+        <!-- 地址 -->
+        <div class="column">
+          <div class="field">
+              <%= form.label :address, '地址', class: 'label' %>
+              <%= form.text_field :address, class: 'input is-medium' %>
+          </div>
+        </div>
 
-      <%= link_to "返回購物車", :back, class: "button is-primary" %></br></br>
+    </div>
 
-      
-      <!-- 付款方式 -->
-      <button id="submit-button" class="button is-danger">結帳！</button>
-      <!-- form.submit '結帳！', class: 'button is-danger is-medium', data: { confirm: '確認送出' } -->
+    <!-- 下排：備註 -->
+    <div class="field">
+      <%= form.label :note, '備註說明', class: 'label' %>
+      <%= form.text_area :note, class: 'textarea is-medium' %>
+    </div>
 
+    <%= link_to "返回購物車", :back, class: "button is-primary" %></br></br>
 
-    <% end %>
-  
-  </section>
+    <!-- 付款方式 -->
+    <%= form.submit '結帳！', class: 'button is-danger is-medium', data: { confirm: '確認送出' } %>
 
+  <% end %>
 
-  <!-- Use the components. We'll see usage instructions next. -->
-  <script type = "text/javascript">
-   
-    document.addEventListener("turbolinks:load", function(event){
-
-      let button = document.querySelector("#submit-button");
-      button.addEventListener("click", (evt) =>{
-        alert("確認購物內容?");
-      } );
-
-
-      braintree.client.create({
-      
-       authorization: CLIENT_TOKEN_FROM_SERVER,
-       container: '#dropin-container'
-      })
-
-        .then((dropinInstance) => {
-          //...
-        })
-        
-        .catch((error) => {
-            //...
-        }
-
-      );
-
-    })
-
-  </script>  
-  
-</body>
+</section>
