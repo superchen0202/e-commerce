@@ -29,8 +29,6 @@ Rails.application.routes.draw do
     end
   end
 
-
-
   namespace :admin do
 
     root 'products#index'

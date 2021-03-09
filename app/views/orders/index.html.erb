@@ -1,5 +1,6 @@
 <section class="section">
   <table class="table is-fullwidth">
+    
     <thead>
       <tr>
         <th>日期</th>
@@ -18,13 +19,13 @@
         <td><%= order.total_price %></td>
         <td><%= order.state %></td>
         <td>
-            <%= link_to "付款", "#", data: {confirm: "確認付款?"}, class: 'button is-primary is-mall' %>
-            
-            <%= link_to "取消", "#", data: {confirm: "確認取消訂單？\n如果訂單已付款將會進行退費"}, class: 'button is-danger is-mall' %>
+            <%= link_to "付款", pay_path(order), data: {confirm: "確認付款?"}, class: 'button is-primary is-mall' if order.may_pay? %>
+            <!-- link_to "取消", "#", data: {confirm: "確認取消訂單？"}, class: 'button is-danger is-mall' -->
          </td>
       </tr>
       <% end %>
     </tbody>
+
   </table>
   
 </section>

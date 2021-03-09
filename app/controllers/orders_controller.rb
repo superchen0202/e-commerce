@@ -28,7 +28,6 @@ class OrdersController < ApplicationController
         order_items.reduce(0) { |sum, item| sum + item.total_price }
     end
     
-
     private
     def order_params        
         params.require(:order).permit(:receipent, :tel, :address, :note)
