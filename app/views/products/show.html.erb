@@ -2,9 +2,8 @@
 
   <nav class="breadcrumb" aria-label="breadcrumbs">
     <ul>
-      <li><a href="#">健康養生</a></li>
-      <li><a href="#">輔具器材</a></li>
-      <li class="is-active"><a href="#" aria-current="page">按摩伸展</a></li>
+      <li><%= link_to @product.category.name, category_path(@product.category) %></li>
+      <li><%= link_to @product.name, product_path(@product) %></li>
     </ul>
   </nav>
 
@@ -13,7 +12,7 @@
       
       <figure class="image">
         <%= image_tag @product.cover_image if @product.cover_image.attached? %>
-        <%= @product.cover_image.signed_id %>
+         <!-- @product.cover_image.signed_id -->
       </figure>
 
       <article class="content">
