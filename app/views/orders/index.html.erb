@@ -20,7 +20,7 @@
         <td><%= order.state %></td>
         <td>
             <%= link_to "付款", pay_path(order), data: {confirm: "確認付款?"}, class: 'button is-primary is-mall' if order.may_pay? %>
-            <!-- link_to "取消", "#", data: {confirm: "確認取消訂單？"}, class: 'button is-danger is-mall' -->
+            <%= link_to "取消", order_path(order), method:"delete", data: {confirm: "確認取消訂單？"}, class: 'button is-danger is-mall' if order.may_cancel? %>
          </td>
       </tr>
       <% end %>

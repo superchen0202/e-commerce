@@ -1,11 +1,12 @@
 <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
-  
 
     <div class="navbar-brand">
        
-        <!-- 左側logo -->
-        <a class="navbar-item" href="/"><%= image_pack_tag "citiesocial_logo.png" %></a>
-        
+        <a class="navbar-item" href="/">
+            <i class="fas fa-home"></i>回首頁
+          </a>
+          
+
         <!-- 漢堡選單 -->
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
@@ -14,7 +15,7 @@
         </a>
 
         <!-- 產品搜尋框 -->
-        <div class="navbar-item field has-addons">
+        <!-- <div class="navbar-item field has-addons">
             
             <div class="control">
               <input class="input" type="text" placeholder="輸入產品關鍵字">
@@ -26,7 +27,7 @@
                 </a>
             </div>
 
-        </div>
+        </div> -->
 
     </div>
 
@@ -35,8 +36,6 @@
         <div class="navbar-end">
             <div class="navbar-item">      
                 <div class="buttons">
-
-                    <% if user_signed_in? %>
 
                     <!-- shop cart -->
                     <div class="navbar-item" data-controller = "cart">
@@ -48,12 +47,13 @@
                     
                     </div>
 
+                    <% if user_signed_in? %>
+
                         <div class="navbar-item has-dropdown is-hoverable">
                             
                             <a class="navbar-link"><i class="fas fa-user"></i> &nbsp; <%= current_user.email %></a>
             
                             <div class="navbar-dropdown">
-                                <a class="navbar-item">個人資料</a>
                                 
                                 <%= link_to "訂單紀錄", orders_path, class:"navbar-item" %>
                                 

@@ -1,5 +1,6 @@
 <section class="container">
 
+  <!-- products Category layer links-->
   <nav class="breadcrumb" aria-label="breadcrumbs">
     <ul>
       <li><%= link_to @product.category.name, category_path(@product.category) %></li>
@@ -8,6 +9,7 @@
   </nav>
 
   <div class="columns">
+
     <div class="column is-7">
       
       <figure class="image">
@@ -44,7 +46,6 @@
           </div>
 
         </div>
-
 
         <div class="columns">
           <div class="column is-3 is-size-4 has-text-right">數量</div>

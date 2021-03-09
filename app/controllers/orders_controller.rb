@@ -24,6 +24,26 @@ class OrdersController < ApplicationController
         end
     end 
 
+    def destroy
+
+        @order = Order.find(params[:id])
+
+        if @order.may_cancel?
+    
+            @order.cancel!
+            @order_items = OrderItem.find_by(order_id: @order.id)
+            @order_items.destroy
+            @order.destroy
+    
+            redirect_to root_path, notice: "訂單已取消！"
+    
+        else
+            redirect_to root_path, notice: "已取消交易！"
+
+        end
+
+    end
+
     def total_price
         order_items.reduce(0) { |sum, item| sum + item.total_price }
     end
