@@ -6,6 +6,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "bulma": "^0.9.1",
     "bulma-carousel": "^4.0.4",
     "npm": "^7.6.1",
@@ -16,7 +17,6 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.1",
     "webpack-dev-server": "^3.11.0"
   }
 }
