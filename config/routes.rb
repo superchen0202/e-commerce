@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :products, except: [:show]  #TBD: delete :delete_attachment
     
     resources :vendors, except: [:show]
+    resources :orders
     resources :categories, except: [:show] do 
   
       collection do      

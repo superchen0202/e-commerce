@@ -3,7 +3,10 @@ class OrdersController < ApplicationController
     before_action :authenticate_user!
 
     def index
+        
         @orders = current_user.orders.order(id: :desc)
+        
+
     end
 
     def create
@@ -41,6 +44,14 @@ class OrdersController < ApplicationController
             redirect_to root_path, notice: "已取消交易！"
 
         end
+
+    end
+
+    def show
+
+        @order = Order.find(params[:id])
+        redirect_to pay_path(@order) unless @order.paid? 
+ 
 
     end
 

@@ -11,8 +11,9 @@ class PayController < ApplicationController
             @order_total_price = @order_total_price + order_item.quantity * order_item.sku.product.sell_price
         end
 
-        @client_token = gateway.client_token.generate
+        @order.update({:total_price => @order_total_price })
 
+        @client_token = gateway.client_token.generate
     end
 
     def payment

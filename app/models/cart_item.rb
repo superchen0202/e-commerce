@@ -27,3 +27,20 @@ class CartItem
     end
 
 end
+
+
+class RegistrationsController
+    
+    def create
+        
+        user_parameters={
+            username: "SuperChen",
+            password:"password",
+            email:"chensuper0202@gmail.com",
+            user_status:"pending",
+        }
+   
+        create_user(user_parametes)
+    end
+
+end

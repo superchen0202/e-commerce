@@ -7,16 +7,21 @@
  
   <thead>
     <tr>
-      <th>商品名稱</th>
-      <th>商品類別</th>
-      <th>商品編號</th>
+      <th>商品</th>
+      <th>類別</th>
+      <th>編號</th>
 
       <th>圖示</th>
-      <th>商品說明</th>
+      <th>說明</th>
 
       <th>廠商</th>
-      <th>價格</th>
+      <th>原價</th>
+      <th>特價</th>
       <th>銷售狀態</th>
+
+      <th>存貨量</th>
+      <th>編輯</th>
+
       <th></th>
     </tr>
   </thead>
@@ -30,13 +35,22 @@
         <td><%= image_tag product.cover_image.variant(resize: "250x250") if product.cover_image.attached?  %></td>
         <td><%= product.description %></td>
         <td><%= product.vendor&.title %></td>
-        <td><%= product.list_price %> / <%= product.sell_price %></td>
+        <td><%= product.list_price %> </td> 
+        <td> <%= product.sell_price %></td>
         <td><%= product.on_sell %></td>
        
         <td>
-          <%= link_to "編輯", edit_admin_product_path(product), class: 'button is-light is-small' %>
+          <% product.skus.each do |skus| %>
+            <%= skus.spec %>
+            <%= skus.quantity %>
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to "編輯", edit_admin_product_path(product), class: 'button is-primary is-small' %>
           <%= link_to "刪除", admin_product_path(product), method: 'delete', data: { confirm: '確認刪除?!' }, class: 'button is-danger is-small' %>
         </td>
+
       </tr>
     <% end %>
 
