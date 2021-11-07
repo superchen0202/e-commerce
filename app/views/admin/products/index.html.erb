@@ -36,7 +36,7 @@
         <td><%= product.description %></td>
         <td><%= product.vendor&.title %></td>
         <td><%= product.list_price %> </td> 
-        <td> <%= product.sell_price %></td>
+        <td><%= product.sell_price %></td>
         <td><%= product.on_sell %></td>
        
         <!-- 商品規格及存貨 -->
@@ -58,7 +58,5 @@
     <%= paginate @products %>
 
   </tbody>
-
-
-
+  
 </table>
