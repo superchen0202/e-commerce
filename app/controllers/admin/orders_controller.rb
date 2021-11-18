@@ -8,22 +8,25 @@ class Admin::OrdersController < Admin::BaseController
 
 
     def update
+        
+        if(@order.may_deliver?)
+            @order.deliver!
+            flash[:notice] = "出貨中"
+        end
 
-        if(@order.may_accept?)
-            
-            @order.accept!
-            @order.update(shipment_status: :accpeted)
-            redirect_to admin_orders_page, notice: "更新"
-
+        if(@order.may_pick?)
+            @order.pick!
+            flash[:notice] = "撿貨中"
         end
         
+        redirect_to admin_orders_path
 
     end
 
 
     private 
     def find_order
-        @order = Order.find([:id])
+        @order = Order.find(params[:id])
     end
     
     def order_params
