@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   aasm column: 'state' do
 
     state :pending, initial: true
-    state :paid, :delivered, :cancelled
+    state :paid, :picked, :delivered, :cancelled
 
     event :pay do
       transitions from: :pending, to: :paid
@@ -25,13 +25,18 @@ class Order < ApplicationRecord
       # end
     end
 
+    event :pick do 
+      transitions from: :paid, to: :picked
+    end
+
     event :deliver do
-      transitions from: :paid, to: :delivered
+      transitions from: :picked, to: :delivered
     end
 
     event :cancel do
-      transitions from: [:pending, :paid, :delivered], to: :cancelled
+      transitions from: [:pending, :paid, :picked,:delivered], to: :cancelled
     end
+
   end
 
   def total_price
