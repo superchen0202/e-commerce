@@ -3,8 +3,8 @@
     
     <thead>
       <tr>
-        <th>日期</th>
         <th>訂單編號</th>
+        <th>日期</th>
         <th>金額</th>
         <th>功能</th>
         <th>出貨進度</th>
@@ -14,13 +14,14 @@
     <tbody>
       <% @orders.each do |order| %>
       <tr>
-        <td><%= order.created_at %></td>
 
         <% unless order.may_cancel? %> 
           <td><%= order.num %></td>
         <% else %>
           <td><%= link_to order.num, order_path(order) %></td>
         <% end %>
+
+        <td><%= order.created_at %></td>
 
         <td><%= order.total_price %></td>
         <td>

@@ -41,28 +41,39 @@
 
           <div class="column is-9 field is-grouped">
             <div class="select is-fullwidth is-grouped">
-              <select data-product-target="sku" > <%= options_for_select(@product.skus.map{ |p| [p.spec, p.id]}) %></select>
+            
+              <select data-product-target="sku" data-action="product#select_spec" > 
+                <%= options_for_select(@product.skus.map{ |p| [p.spec, p.id]} ) %>
+              </select>
+            
             </div>
           </div>
 
         </div>
 
         <div class="columns">
+          
           <div class="column is-3 is-size-4 has-text-right">數量</div>
 
           <div class="column is-9 field is-grouped">
             <a href="#" class="button is-white is-medium" data-action="product#minus_quantity">-</a>
             <input type="number" name="quantity" class="input is-medium has-text-centered" value="1" data-product-target="quantity">
             <a href="#" class="button is-white is-medium" data-action="product#add_quantity">+</a>
+            
+
+            <div>庫存</div> 
+            <div data-product-target="spec">0</div> 
+              
           </div> 
 
+          
         </div>
 
       </div>
 
     <% end %>
 
-      <a href="#" class="button is-primary is-medium is-fullwidth" data-action="product#add_to_cart" data-product-target="cartButton">加到購物車</a>
+      <a href="#" class="button is-primary is-medium is-fullwidth" data-action="product#add_to_cart" data-product-target="cartButton" >加到購物車</a>
     </div>
 
   </div>

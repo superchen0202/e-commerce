@@ -48,8 +48,11 @@ Rails.application.routes.draw do
   # api
   namespace :api do 
     namespace :v1 do
+      
       post 'subscribe', to: 'utils#subscribe'
       post 'cart', to: 'utils#cart'
+      post 'spec_sync', to: 'utils#spec_sync'
+
     end
   end
 

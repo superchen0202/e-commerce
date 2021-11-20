@@ -35,4 +35,25 @@ class Api::V1::UtilsController < ApplicationController
       
     end
 
+    def spec_sync 
+
+        sku = Sku.find_by(skus: {id: params[:sku_id]})
+
+        if sku != nil
+            
+            render json:{
+                status: "OK",
+                spec: sku.spec,
+                quantity: sku.quantity
+            }
+
+        else
+            render json:{ 
+                status: "X"
+            }
+
+        end
+
+    end
+
 end

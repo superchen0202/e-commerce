@@ -3,7 +3,7 @@ import Rails from "@rails/ujs"
 
 export default class extends Controller {
   
-  static targets = [ "quantity", "sku", "cartButton" ]
+  static targets = [ "quantity", "sku", "cartButton", "spec" ]
 
   //   connect() {
   //     console.log("I see a big girl");
@@ -105,5 +105,49 @@ export default class extends Controller {
       }
       
   }
+
+
+  select_spec(event){
+
+    event.preventDefault();
+
+    let select = document.querySelector('select')
+    let spec = select.options[select.selectedIndex];
+    //console.log(spec.value); //id
+
+    
+
+    let selectedOption = new FormData();
+    selectedOption.append("sku_id", spec.value);
+
+    Rails.ajax({
+
+      url: "/api/v1/spec_sync",
+      type: "POST",
+      data: selectedOption,
+    
+      success: (response) =>{
+        
+        if(response.status === "OK"){
+
+          let output = response.quantity;
+          this.specTarget.innerText = output;
+        }
+        
+      },
+      
+      error: (err) => {
+        console.log(err);
+      }
+
+
+    })
+
+
+
+  
+  }
+
+
 
 }

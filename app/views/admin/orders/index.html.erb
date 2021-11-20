@@ -29,7 +29,7 @@
           <td>
               <%= link_to "撿貨", admin_order_path(order), method:"patch", data: {confirm: "確認撿貨？"}, class: 'button is-primary is-mall' if order.may_pick?  %>
               <%= link_to "出貨", admin_order_path(order), method:"patch", data: {confirm: "確認出貨？"}, class: 'button is-info is-mall' if order.may_deliver?  %>
-            </td>
+          </td>
   
         </tr>
         <% end %>
