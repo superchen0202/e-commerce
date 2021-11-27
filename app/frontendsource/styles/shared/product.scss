@@ -8,3 +8,14 @@ div .trix-content{
     margin-top: 1em;
     margin-bottom: 3em;      
 }
+
+
+// 隱藏input number箭頭
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  margin: 0; 
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}

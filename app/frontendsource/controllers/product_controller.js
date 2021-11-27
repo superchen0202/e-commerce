@@ -5,68 +5,89 @@ export default class extends Controller {
   
   static targets = [ "quantity", "sku", "cartButton", "spec" ]
 
-  //   connect() {
-  //     console.log("I see a big girl");
-  //   }
+  // connect() {
+  //   console.log("I see a big girl");
+  // }
   
   add_quantity(event){
    
     event.preventDefault();
 
+    let maxQuantity = Number(document.querySelector("div[data-product-target]").innerText);
     let quantity = Number(this.quantityTarget.value);
-    this.quantityTarget.value = quantity + 1;
-    
+
+    if(quantity < maxQuantity){
+      this.quantityTarget.value = quantity + 1;
+    }
+    else{
+      alert("已無庫存!");
+      this.quantityTarget.value = maxQuantity;
+    }
+
    // console.log(this.quantityTarget.value);
   }
 
   minus_quantity(event){
    
     event.preventDefault();
-
+   
+    let maxQuantity = Number(document.querySelector("div[data-product-target]").innerText);
     let quantity = Number(this.quantityTarget.value);
     
     if(quantity > 1){
-
-        this.quantityTarget.value = quantity - 1;
-        //console.log(this.quantityTarget.value);
-    
+      this.quantityTarget.value = quantity - 1;
+      //console.log(this.quantityTarget.value);
     }
-    
+    else{
+      alert("選購數量不得低於1!")
+      this.quantityTarget.value = 1;
+    }
+  
    }
 
   add_to_cart(event){
 
       event.preventDefault();
+      
+      //get skus quantity, and user's quantity to check beefore sending data to API.
+      let maxQuantity = Number(document.querySelector("div[data-product-target]").innerText);
+      let quantity = Number(this.quantityTarget.value);
 
-      //catch product items details
-      let product_id = document.querySelector("div[data-product-id]").dataset["productId"];
-      let product_quantity = this.quantityTarget.value;
-      let product_skus = this.skuTarget.value;
+      if(quantity > maxQuantity){
+        alert("已無庫存!");
+        this.quantityTarget.value = maxQuantity;
+      }
 
-      //packing data to send to backend API
-      let cart_details = new FormData();
-      cart_details.append("product_id", product_id);
-      cart_details.append("product_quantity", product_quantity);
-      cart_details.append("product_skus", product_skus);
+      if(quantity <= 0){
+        alert("選購數量不得低於1!");
+        this.quantityTarget.value = 1;
+      }
 
-      // check value of form to send
-      // console.log("product_skus:", product_id);
-      // console.log("product_quantity:", product_quantity);
-      // console.log("product_skus:", product_skus);
-      // for (let value of cart_details) {
-      //     console.log(value);
-      // }
- 
-      // console.log(cart_details);
-     
-  
-      // let button be loading and disabled while sending data to api 
-      let button =  this.cartButtonTarget;
-      button.classList.add("is-loading");
+      if(quantity > 0 && quantity <= maxQuantity){
+   
+        //catch product items details
+        let product_id = document.querySelector("div[data-product-id]").dataset["productId"];
+        let product_quantity = this.quantityTarget.value;
+        let product_skus = this.skuTarget.value;
+        
+        //packing data to send to backend API
+        let cart_details = new FormData();
+        cart_details.append("product_id", product_id);
+        cart_details.append("product_quantity", product_quantity);
+        cart_details.append("product_skus", product_skus);
 
-      // validate the data prepared to send api
-      if (product_id && product_skus && product_quantity){
-          
+        // check value of form to send
+        // for (let value of cart_details) {
+        //     console.log(value);
+        // }      
+
+        // let button be loading and disabled while sending data to api 
+        let button =  this.cartButtonTarget;
+        button.classList.add("is-loading");
+
+        // validate the data prepared to send api
+        if (product_id && product_skus && product_quantity ){
+            
           //API
           Rails.ajax({
               
@@ -86,26 +107,22 @@ export default class extends Controller {
                 //Cutomized the JS event, broadcast the event to controller of cart icon, update the item count of cart iconsynchronously
                 let evt = new CustomEvent("addToCart", {"detail": {item_count } });
                 document.dispatchEvent(evt);
-
               }
 
             }, 
 
             error: (err) =>{
-
               console.log(err);
             },
 
             complete: () => {
                 button.classList.remove("is-loading");
             }
-
           })
 
-      }
-      
+        }
+      }      
   }
-
 
   select_spec(event){
 
@@ -147,7 +164,5 @@ export default class extends Controller {
 
   
   }
-
-
 
 }

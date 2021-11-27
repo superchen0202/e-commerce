@@ -57,17 +57,24 @@
 
           <div class="column is-9 field is-grouped">
             <a href="#" class="button is-white is-medium" data-action="product#minus_quantity">-</a>
-            <input type="number" name="quantity" class="input is-medium has-text-centered" value="1" data-product-target="quantity">
-            <a href="#" class="button is-white is-medium" data-action="product#add_quantity">+</a>
+           
             
-
-            <div>庫存</div> 
-            <div data-product-target="spec">0</div> 
-              
+           
+            <!-- data-action="product#check_input"  -->
+            <input type="number" name="quantity" class="input is-medium has-text-centered" value="1" data-product-target="quantity" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" >
+            <a href="#" class="button is-white is-medium" data-action="product#add_quantity">+</a>
+          
+            
+            庫存
+            <div data-product-target="spec" ><%= @product.skus.first.quantity %></div>
+                        
           </div> 
-
+          
           
         </div>
+
+        
+
 
       </div>
 
