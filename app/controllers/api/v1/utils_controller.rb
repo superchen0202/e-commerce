@@ -32,7 +32,7 @@ class Api::V1::UtilsController < ApplicationController
 
             sku.update(quantity: @product_left)
 
-            render json: { status: "OK", items: current_cart.items.count, sku: @product_left }
+            render json: { status: "OK", items: current_cart.items.count, sku_left: @product_left }
     
         else
             render json: { status: "X_X" }

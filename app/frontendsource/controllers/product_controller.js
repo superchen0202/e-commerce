@@ -97,9 +97,14 @@ export default class extends Controller {
           
             success: (response) =>{
               
-              console.log(response);
+              //console.log(response);
 
               if(response.status === "OK"){
+
+                //change the numner of quantity while product add into carts
+                let output = response.sku_left;
+                this.specTarget.innerText = output;
+                this.quantityTarget.value = 1;
 
                 //capture the data API responded 
                 let item_count = response.items || 0;
@@ -112,6 +117,7 @@ export default class extends Controller {
             }, 
 
             error: (err) =>{
+              alert("產品數量不夠")
               console.log(err);
             },
 
@@ -132,8 +138,6 @@ export default class extends Controller {
     let spec = select.options[select.selectedIndex];
     //console.log(spec.value); //id
 
-    
-
     let selectedOption = new FormData();
     selectedOption.append("sku_id", spec.value);
 
@@ -149,6 +153,7 @@ export default class extends Controller {
 
           let output = response.quantity;
           this.specTarget.innerText = output;
+          this.quantityTarget.value = 1;
         }
         
       },
