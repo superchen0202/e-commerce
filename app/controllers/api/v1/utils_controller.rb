@@ -19,15 +19,20 @@ class Api::V1::UtilsController < ApplicationController
         # old version for add_items
         #product = Product.friendly.find(params[:product_id])
 
+        sku = Sku.find_by(skus:{ id: params[:product_skus]})
         product = Product.joins(:skus).find_by(skus:{ id: params[:product_skus]})
+        
+        @product_to_buy = params[:product_quantity].to_i
+        @product_left = sku.quantity - @product_to_buy 
 
-
-        if product != nil
+        if (product != nil && @product_left >=0 )
             
             current_cart.add_sku(params[:product_skus], params[:product_quantity])
             session[:cart_9527] = current_cart.to_hash
-            
-            render json: { status: "OK", items: current_cart.items.count }
+
+            sku.update(quantity: @product_left)
+
+            render json: { status: "OK", items: current_cart.items.count, sku: @product_left }
     
         else
             render json: { status: "X_X" }
