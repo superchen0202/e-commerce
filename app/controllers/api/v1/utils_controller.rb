@@ -35,7 +35,7 @@ class Api::V1::UtilsController < ApplicationController
             render json: { status: "OK", items: current_cart.items.count, sku_left: @product_left }
     
         else
-            render json: { status: "X_X" }
+            render json: { status: "Not Enough" }
         end
       
     end

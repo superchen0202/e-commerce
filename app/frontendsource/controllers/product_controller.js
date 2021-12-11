@@ -107,7 +107,9 @@ export default class extends Controller {
                 this.quantityTarget.value = 1;
 
                 //capture the data API responded 
+                console.log(response.items);
                 let item_count = response.items || 0;
+                alert("已加入到購物車!");
                 
                 //Cutomized the JS event, broadcast the event to controller of cart icon, update the item count of cart iconsynchronously
                 let evt = new CustomEvent("addToCart", {"detail": {item_count } });
